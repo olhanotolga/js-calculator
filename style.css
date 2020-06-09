@@ -1,0 +1,60 @@
+* {
+    font-family: monospace;
+    font-size: 120%;
+    box-sizing: border-box;
+}
+main {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin: auto;
+    background-color: #000f0f;
+    padding: .5em;
+}
+h1 {
+    text-align: center;
+}
+.display {
+    background-color: #338888;
+    border: 1px solid #001010;
+    color: white;
+    text-align: end;
+    padding: .5em;
+}
+.keys {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+}
+.controls, .operation, .digit, .manipulation {
+    border-radius: 0px;
+    border: 1px solid #001010;
+    padding: .2em;
+}
+#reset {
+    grid-column: 1 / span 2;
+}
+.operation {
+    background-color: #ddeeee;
+}
+.manipulation {
+    background-color: #eeeeee;
+}
+.controls {
+    background-color: #dddddd;
+}
+@media screen and (min-width: 1000px) {
+    main {
+        width: 50%;
+    }
+}
+@media screen and (max-width: 800px) {
+    main {
+        width: 80%;
+    }
+}
+@media screen and (max-width: 600px) {
+    main {
+        width: 95%;
+    }
+}
