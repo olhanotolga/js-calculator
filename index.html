@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JS Calculator</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
 </head>
 <body>
     <header>
@@ -17,20 +18,20 @@
             <button class="controls" id="reset">AC</button>
             <button class="manipulation">&percnt;</button>
             <button class="operation">&div;</button>
-            <button class="digit" type="button" value="7">7</button>
-            <button class="digit" type="button" value="8">8</button>
-            <button class="digit" type="button" value="9">9</button>
+            <button class="digit" type="button" value="7" onclick="setInput(value)">7</button>
+            <button class="digit" type="button" value="8" onclick="setInput(value)">8</button>
+            <button class="digit" type="button" value="9" onclick="setInput(value)">9</button>
             <button class="operation">&times;</button>
-            <button class="digit" type="button" value="4">4</button>
-            <button class="digit" type="button" value="5">5</button>
-            <button class="digit" type="button" value="6">6</button>
+            <button class="digit" type="button" value="4" onclick="setInput(value)">4</button>
+            <button class="digit" type="button" value="5" onclick="setInput(value)">5</button>
+            <button class="digit" type="button" value="6" onclick="setInput(value)">6</button>
             <button class="operation">&minus;</button>
-            <button class="digit" type="button" value="1">1</button>
-            <button class="digit" type="button" value="2">2</button>
-            <button class="digit" type="button" value="3">3</button>
+            <button class="digit" type="button" value="1" onclick="setInput(value)">1</button>
+            <button class="digit" type="button" value="2" onclick="setInput(value)">2</button>
+            <button class="digit" type="button" value="3" onclick="setInput(value)">3</button>
             <button class="operation">&plus;</button>
             <button class="manipulation">&plusmn;</button>
-            <button class="digit" type="button" value="0">0</button>
+            <button class="digit" type="button" value="0" onclick="setInput(value)">0</button>
             <button class="manipulation">&comma;</button>
             <button class="operation">&equals;</button>
         </section>
@@ -40,6 +41,6 @@
 
     </footer>
 
-    <script src="script.js"></script>
+    <!-- <script src="script.js"></script> -->
 </body>
 </html>
