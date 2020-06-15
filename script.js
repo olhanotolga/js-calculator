@@ -32,18 +32,49 @@ const clear = () => {
     operator = undefined;
 }
 
+// addition
 const add = (a, b) => {
     operator = 'addition';
-    let sum = a + b;
-    //console.log(sum);
-    return sum;
+    return a + b;
+};
+// subtraction
+const subtract = (a, b) => {
+    operator = 'subtraction';
+    return a - b;
+};
+// multiplication
+const multiply = (a, b) => {
+    operator = 'multiplication';
+    return a * b;
+};
+// division
+const divide = (a, b) => {
+    operator = 'division';
+    return a / b;
 };
 
+
 const calculate = () => {
-    //console.log(add(input1, input2));
-    document.querySelector('.display').innerHTML = add(input1, input2);
-    console.log(input1, input2, operator);
-    clear();
-    console.log(input1, input2, operator);
+    switch(operator){
+        case 'addition':
+            document.querySelector('.display').innerHTML = add(input1, input2);
+            clear();
+            break;
+        case 'subtraction':
+            document.querySelector('.display').innerHTML = subtract(input1, input2);
+            clear();
+            break;
+        case 'multiplication':
+            document.querySelector('.display').innerHTML = multiply(input1, input2);
+            clear();
+            break;
+        case 'division':
+            document.querySelector('.display').innerHTML = divide(input1, input2);
+            clear();
+            break;
+        default:
+            console.log('no operator selected');
+    }
+    
 }
 
