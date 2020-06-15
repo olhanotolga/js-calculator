@@ -8,11 +8,16 @@ const setInput = value => {
     displayInput(value);
     if (input1) {
         input2 = Number(value);
+        // if operator is not defined, then add value to input1
+        if(!operator) {
+            let twoDigitInput = input1.toString().concat(value);
+            input1 = Number(twoDigitInput);
+            console.log(twoDigitInput);
+        }
     } else {
         input1 = Number(value);
     }
     console.log(input1, input2);
-    
 }
 
 // display entered values
@@ -49,10 +54,12 @@ const multiply = (a, b) => {
 };
 // division
 const divide = (a, b) => {
+    if (b == 0) {
+        return document.querySelector('.display').innerHTML = "don't you ever divide by zero!";
+    } 
     operator = 'division';
     return a / b;
 };
-
 
 const calculate = () => {
     switch(operator){
@@ -74,7 +81,6 @@ const calculate = () => {
             break;
         default:
             console.log('no operator selected');
-    }
-    
+    }   
 }
 
