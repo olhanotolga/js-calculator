@@ -4,20 +4,32 @@ let input2;
 let operator;
 
 const setInput = value => {
-    // if input1 is defined, then store the 2nd value in input2
-    displayInput(value);
-    if (input1) {
-        input2 = Number(value);
-        // if operator is not defined, then add value to input1
-        if(!operator) {
-            let twoDigitInput = input1.toString().concat(value);
-            input1 = Number(twoDigitInput);
-            console.log(twoDigitInput);
-        }
-    } else {
+    
+    // display current value
+    // if operator undefined, concatenate the next entered value to the previous one, save it and display it as input1
+    // if operator defined, set the input2
+    // if input2 defined, concat the next entered value to the previous one, save it and display it as input2
+    if (!input1) {
+        displayInput(value);
         input1 = Number(value);
+    } else {
+        if(!operator) {
+            let twoDigitInput1 = input1.toString().concat(value);
+            input1 = Number(twoDigitInput1);
+            displayInput(twoDigitInput1);
+            console.log(twoDigitInput1);
+        } else {
+            if (!input2) {
+                displayInput(value);
+                input2 = Number(value);
+            } else {
+                let twoDigitInput2 = input2.toString().concat(value);
+                input2 = Number(twoDigitInput2);
+                displayInput(twoDigitInput2);
+                console.log(twoDigitInput2);
+            }
+        }
     }
-    console.log(input1, input2);
 }
 
 // display entered values
@@ -42,19 +54,16 @@ const setOperator = value => {
     console.log(operator);
 }
 
-// addition
+// calculation functions
 const add = (a, b) => {
     return a + b;
 };
-// subtraction
 const subtract = (a, b) => {
     return a - b;
 };
-// multiplication
 const multiply = (a, b) => {
     return a * b;
 };
-// division
 const divide = (a, b) => {
     if (b == 0) {
         return document.querySelector('.display').innerHTML = "don't you ever divide by zero!";
@@ -87,7 +96,6 @@ const calculate = () => {
 
 // TODO:
 // Refactor
-// Inspect subtraction with a negative sum
 // Allow input of 2-digit (and more) numbers
 // Display 2-digit (and more) numbers in the display
 
