@@ -17,19 +17,19 @@
         <section class="keys">
             <button class="controls" id="reset" type="button" onclick="reset()">AC</button>
             <button class="manipulation">&percnt;</button>
-            <button class="operation" id="divide" onclick="divide()">&div;</button>
+            <button class="operation" id="divide" value='division' onclick="setOperator(value)">&div;</button>
             <button class="digit" type="button" value="7" onclick="setInput(value)">7</button>
             <button class="digit" type="button" value="8" onclick="setInput(value)">8</button>
             <button class="digit" type="button" value="9" onclick="setInput(value)">9</button>
-            <button class="operation" id="multiply" onclick="multiply()">&times;</button>
+            <button class="operation" id="multiply" value='multiplication' onclick="setOperator(value)">&times;</button>
             <button class="digit" type="button" value="4" onclick="setInput(value)">4</button>
             <button class="digit" type="button" value="5" onclick="setInput(value)">5</button>
             <button class="digit" type="button" value="6" onclick="setInput(value)">6</button>
-            <button class="operation" id="subtract" onclick="subtract()">&minus;</button>
+            <button class="operation" id="subtract" value='subtraction' onclick="setOperator(value)">&minus;</button>
             <button class="digit" type="button" value="1" onclick="setInput(value)">1</button>
             <button class="digit" type="button" value="2" onclick="setInput(value)">2</button>
             <button class="digit" type="button" value="3" onclick="setInput(value)">3</button>
-            <button class="operation" id="add" onclick="add()">&plus;</button>
+            <button class="operation" id="add" onclick="setOperator(value)" value='addition'>&plus;</button>
             <button class="manipulation">&plusmn;</button>
             <button class="digit" type="button" value="0" onclick="setInput(value)">0</button>
             <button class="manipulation">&comma;</button>

@@ -37,27 +37,28 @@ const clear = () => {
     operator = undefined;
 }
 
+const setOperator = value => {
+    operator = value;
+    console.log(operator);
+}
+
 // addition
 const add = (a, b) => {
-    operator = 'addition';
     return a + b;
 };
 // subtraction
 const subtract = (a, b) => {
-    operator = 'subtraction';
     return a - b;
 };
 // multiplication
 const multiply = (a, b) => {
-    operator = 'multiplication';
     return a * b;
 };
 // division
 const divide = (a, b) => {
     if (b == 0) {
         return document.querySelector('.display').innerHTML = "don't you ever divide by zero!";
-    } 
-    operator = 'division';
+    }
     return a / b;
 };
 
@@ -83,4 +84,12 @@ const calculate = () => {
             console.log('no operator selected');
     }   
 }
+
+// TODO:
+// Refactor
+// Inspect subtraction with a negative sum
+// Allow input of 2-digit (and more) numbers
+// Display 2-digit (and more) numbers in the display
+
+
 
