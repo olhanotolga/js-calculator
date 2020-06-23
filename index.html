@@ -13,10 +13,10 @@
     </header>
 
     <main class="calculator">
-        <section class="display">0.000000000000000000001</section>
+        <section class="display">*(^-^)*</section>
         <section class="keys">
             <button class="controls" id="reset" type="button" onclick="reset()">AC</button>
-            <button class="manipulation">&percnt;</button>
+            <button class="manipulation" id="percent" onclick="calcPercent()">&percnt;</button>
             <button class="operation" id="divide" value='division' onclick="setOperator(value)">&div;</button>
             <button class="digit" type="button" value="7" onclick="setInput(value)">7</button>
             <button class="digit" type="button" value="8" onclick="setInput(value)">8</button>
@@ -30,9 +30,9 @@
             <button class="digit" type="button" value="2" onclick="setInput(value)">2</button>
             <button class="digit" type="button" value="3" onclick="setInput(value)">3</button>
             <button class="operation" id="add" onclick="setOperator(value)" value='addition'>&plus;</button>
-            <button class="manipulation">&plusmn;</button>
+            <button class="manipulation" id="plusminus" onclick="changeSign()">&plusmn;</button>
             <button class="digit" type="button" value="0" onclick="setInput(value)">0</button>
-            <button class="manipulation">&comma;</button>
+            <button class="manipulation" id="floatingPoint" onclick="addFloatingPoint()">&comma;</button>
             <button class="operation" id="calculate" onclick="calculate()">&equals;</button>
         </section>
     </main>
