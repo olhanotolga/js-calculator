@@ -26,12 +26,16 @@ h1 {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(5, 1fr);
 }
+button {
+    transition: all 0.5s;
+    position: relative;
+}
 .controls, .operation, .digit, .manipulation {
     border-radius: 0px;
     border: 1px solid #001010;
     padding: .2em;
 }
-#reset {
+#clear {
     grid-column: 1 / span 2;
 }
 .operation {
