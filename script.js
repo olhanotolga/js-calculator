@@ -215,23 +215,20 @@ const calculate = () => {
     }
 };
 
-// function moves each button by x value for left position and by y value for top position
+// animation upon division by zero
 const dividedByZero = () => {
     // function call changes some styling:
     const bckground = document.querySelector("body");
-    bckground.style.backgroundColor = "black";
+    bckground.classList.add("brokenBckground");
     const display = document.querySelector(".display");
-    display.style.backgroundColor = "firebrick";
-    display.style.position = "relative";
-    display.style.transform = "translate(0px, 150px) rotate(-25deg) scale(1.1)";
-    
-    display.style.zIndex = "3";
+    display.classList.add("brokenDisplay");
 
+    // function moves each button by x value for left position and by y value for top position
     const buttons = document.querySelectorAll("button");
 
     for (let button of buttons) {
         // for each button, the styling is changed
-        button.style.backgroundColor = "gold";
+        button.classList.add("brokenBtns");
         
         // final x and y positions are set
         const randomMinusPlus50 = [Math.floor(Math.random() * 100 + 1), Math.floor(Math.random() * -100 - 1)];
@@ -242,83 +239,28 @@ const dividedByZero = () => {
         let pos = 0;
 
         // for each button, the movement from position 0 to position x and y is animated
-        
         const animate = () => {
+            // ends animation once reached the final position
             if (Math.abs(pos) >= Math.abs(finalPosX) || Math.abs(pos) >= Math.abs(finalPosY)) {
                 clearInterval(animation);
             }
             if (Math.abs(finalPosX) > Math.abs(pos)) {
-                
                 if (finalPosX < 0) {
                     pos -= 1;
                 } else {
                     pos += 3;
                 }
                 button.style.left = pos + "px";
-                console.log(pos);
             }
             if (Math.abs(finalPosY) > Math.abs(pos)) {
-                
                 if (finalPosY < 0) {
                     pos -= 2;
                 } else {
                     pos += 4;
                 }
                 button.style.top = pos + "px";
-                console.log(pos);
             }
         }
         const animation = setInterval(animate, 100);
     }
-    
 };
-
-
-// const bckground = document.querySelector("body");
-//         bckground.style.backgroundColor = "black";
-//         const display = document.querySelector(".display");
-//         display.style.backgroundColor = "firebrick";
-
-//         const buttons = document.querySelectorAll("button");
-        
-//         const randomMinusPlus50 = [Math.floor(Math.random() * 100 + 1), Math.floor(Math.random() * -100 - 1)];
-//         // let randomValue = randomMinusPlus50[Math.round(Math.random())];
-//         let pos = 0;
-        
-//         for (let button of buttons) {
-//             let randomValueTop = randomMinusPlus50[Math.round(Math.random())];
-//             let randomValueLeft = randomMinusPlus50[Math.round(Math.random())];
-//             // button.style.top = randomValue + "px";
-//             // button.style.left = randomValue + "px";
-//             button.style.top = randomValueTop + "px";
-//             button.style.left = randomValueLeft + "px";
-//             button.style.backgroundColor = "gold";
-            
-            
-//             const animation = () => {
-//                 if (Math.abs(pos) > Math.abs(randomValueTop) && Math.abs(pos) > Math.abs(randomValueLeft)) {
-//                     clearInterval(animate);
-                    
-//                 } else {
-//                     if (pos < 0) {
-//                         pos -= 5;
-//                     } else {
-//                         pos += 5;
-//                     };
-//                     button.style.top = pos + "px";
-//                     console.log(button.style.top);
-//                     button.style.left = pos + "px";
-//                     console.log(button.style.left);
-//                 }
-//             };
-//             const animate = setInterval(animation, 400);
-//         }
-
-
-
-
-
-
-
-
-

@@ -47,6 +47,21 @@ button {
 .controls {
     background-color: #dddddd;
 }
+
+/* functional classes */
+.brokenDisplay {
+    background-color: #b22222;
+    position: relative;
+    transform: translate(0px, 150px) rotate(-25deg) scale(1.1);
+    z-index: 3;
+}
+.brokenBckground {
+    background-color: #000000;
+}
+.brokenBtns {
+    background-color: #ffd700;
+}
+
 @media screen and (min-width: 1000px) {
     main {
         width: 50%;
