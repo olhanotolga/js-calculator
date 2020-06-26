@@ -27,6 +27,7 @@ h1 {
     grid-template-rows: repeat(5, 1fr);
 }
 button {
+    background-color: #eeeeee;
     transition: all 0.5s;
     position: relative;
 }
