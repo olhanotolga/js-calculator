@@ -1,5 +1,6 @@
 let input1;
 let input2;
+let result;
 
 let operator;
 
@@ -52,15 +53,17 @@ const displayInput = value => {
 // reset the values and clear the display on button click
 const clearDisplay = () => {
     reset();
+    input1 = undefined;
+    isInput1Float = false;
     document.querySelector('.display').innerHTML = 0;
 }
 
 // reset the values of inputs and operator
 const reset = () => {
-    input1 = undefined;
+    // input1 = undefined;
     input2 = undefined;
     operator = undefined;
-    isInput1Float = false;
+    // isInput1Float = false;
     isInput2Float = false;
 }
 
@@ -76,35 +79,42 @@ const setOperator = value => {
 const add = (a, b) => {
     console.log(input1, typeof input1, input2, typeof input2);
     if (isInput1Float == true || isInput2Float == true) {
-        return (Number(a) + Number(b)).toFixed(5);
+        result = (Number(a) + Number(b)).toFixed(5);
+        return result;
     } else {
-        return Number(a) + Number(b);
+        result = Number(a) + Number(b);
+        return result;
     }
 };
 const subtract = (a, b) => {
     if (isInput1Float == true || isInput2Float == true) {
-        return (Number(a) - Number(b)).toFixed(5);
+        result = (Number(a) - Number(b)).toFixed(5);
+        return result;
     } else {
-        return Number(a) - Number(b);
+        result = Number(a) - Number(b);
+        return result;
     }
 };
 const multiply = (a, b) => {
     if (isInput1Float == true || isInput2Float == true) {
-        return (Number(a) * Number(b)).toFixed(5);
+        result = (Number(a) * Number(b)).toFixed(5);
+        return result;
     } else {
-        return Number(a) * Number(b);
+        result = Number(a) * Number(b);
+        return result;
     }
 };
 const divide = (a, b) => {
     if (b == 0) {
         dividedByZero();
         return document.querySelector('.display').innerHTML = "don't you ever divide by zero!";
-        
     }
     if (isInput1Float == true || isInput2Float == true) {
-        return (Number(a) / Number(b)).toFixed(5);
+        result = (Number(a) / Number(b)).toFixed(5);
+        return result;
     } else {
-        return Number(a) / Number(b);
+        result = Number(a) / Number(b);
+        return result;
     }
 };
 
@@ -193,26 +203,27 @@ const calculate = () => {
 
     const display = document.querySelector('.display');
 
+    // should be able to save result as input1
+
     switch (operator) {
         case 'addition':
             display.innerHTML = add(input1, input2);
-            reset();
             break;
         case 'subtraction':
             display.innerHTML = subtract(input1, input2);
-            reset();
             break;
         case 'multiplication':
             display.innerHTML = multiply(input1, input2);
-            reset();
             break;
         case 'division':
             display.innerHTML = divide(input1, input2);
-            reset();
             break;
         default:
             console.log('no operator selected');
     }
+    
+    input1 = result;
+    reset();
 };
 
 // animation upon division by zero
