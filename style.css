@@ -30,23 +30,25 @@ button {
     transition: all 0.5s;
     position: relative;
 }
-.controls, .operation, .digit, .manipulation {
+#clear, .operation, .digit, .manipulation {
     border-radius: 0px;
     border: 1px solid #001010;
     padding: .2em;
 }
 #clear {
     grid-column: 1 / span 2;
+    background-color: #dddddd;
 }
 .operation {
     background-color: #ddeeee;
 }
-.manipulation, .digit {
+.manipulation {
     background-color: #eeeeee;
 }
-.controls {
-    background-color: #dddddd;
+.digit {
+    background-color: #ffffff;
 }
+
 
 /* functional classes */
 .brokenDisplay {
