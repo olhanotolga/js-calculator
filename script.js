@@ -9,15 +9,15 @@ let isInput1Float = false;
 let isInput2Float = false;
 
 const setInput = value => {
-    // display current value
-    // if operator undefined, concatenate the next entered value to the previous one, save it and display it as input1
-    // if operator defined, set the input2
-    // if input2 defined, concat the next entered value to the previous one, save it and display it as input2
+
+    // if we have result that was set to input1, we do not concatenate new input values (input1 is reset)
+
+    
+
     if (input1 === undefined) {
         displayInput(value);
         input1 = value;
         console.log(input1, typeof input1);
-        
     } else {
         if(!operator) {
             let twoDigitInput1 = input1.toString().concat(value);
@@ -38,8 +38,6 @@ const setInput = value => {
                 input2 = twoDigitInput2;
                 displayInput(input2);
                 console.log(input2);
-                
-                
             }
         }
     }
@@ -68,10 +66,17 @@ const reset = () => {
 }
 
 const setOperator = value => {
-    operator = value;
-    input1 = Number(input1);
-    displayInput(input1);
-    console.log(input1, operator);
+
+    // if we have input2 and are setting the operator, we should calculate the operation with input1 and input2 , save result to input1 and reassign the operator
+
+    if (input2) {
+        calculate();
+    } else {
+        operator = value;
+        input1 = Number(input1);
+        displayInput(input1);
+        console.log(input1, operator);
+    }
 }
 
 // CALCULATION FUNCTIONS
@@ -201,22 +206,18 @@ const calculate = () => {
     
     console.log(input1, typeof input1, operator, input2, typeof input2);
 
-    const display = document.querySelector('.display');
-
-    // should be able to save result as input1
-
     switch (operator) {
         case 'addition':
-            display.innerHTML = add(input1, input2);
+            displayInput(add(input1, input2));
             break;
         case 'subtraction':
-            display.innerHTML = subtract(input1, input2);
+            displayInput(subtract(input1, input2));
             break;
         case 'multiplication':
-            display.innerHTML = multiply(input1, input2);
+            displayInput(multiply(input1, input2));
             break;
         case 'division':
-            display.innerHTML = divide(input1, input2);
+            displayInput(divide(input1, input2));
             break;
         default:
             console.log('no operator selected');
