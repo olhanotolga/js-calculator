@@ -1,8 +1,16 @@
-let input1;
-let input2;
-let result;
+/*
++ if calculation is followed by input (not operator), reassign input1 as value
++ if calculation is followed by operator, reassign input1 as result
++ allow inputs that start with -0.
+- forbid inputs that start with multiple 0s
+- fix the issue with integers becoming floats with trailing 0s
+*/
 
-let operator;
+let input1 = null;
+let input2 = null;
+let result = null;
+
+let operator = null;
 
 // maybe worth creating isInput1Float and isInput2Float ?
 let isInput1Float = false;
@@ -11,10 +19,14 @@ let isInput2Float = false;
 const setInput = value => {
 
     // if we have result that was set to input1, we do not concatenate new input values (input1 is reset)
-
+    if (result !== null) {
+        displayInput(value);
+        result = null;
+        return input1 = value;
+    }
     
 
-    if (input1 === undefined) {
+    if (input1 === null) {
         displayInput(value);
         input1 = value;
         console.log(input1, typeof input1);
@@ -51,32 +63,37 @@ const displayInput = value => {
 // reset the values and clear the display on button click
 const clearDisplay = () => {
     reset();
-    input1 = undefined;
+    result = null;
     isInput1Float = false;
     document.querySelector('.display').innerHTML = 0;
 }
 
 // reset the values of inputs and operator
 const reset = () => {
-    // input1 = undefined;
-    input2 = undefined;
-    operator = undefined;
-    // isInput1Float = false;
+    input1 = null;
+    input2 = null;
+    operator = null;
     isInput2Float = false;
 }
 
 const setOperator = value => {
-
-    // if we have input2 and are setting the operator, we should calculate the operation with input1 and input2 , save result to input1 and reassign the operator
-
-    if (input2) {
-        calculate();
-    } else {
+    if (result) {
+        input1 = result;
+        result = null;
         operator = value;
-        input1 = Number(input1);
-        displayInput(input1);
-        console.log(input1, operator);
+    } else {
+        if (input2) {
+            calculate();
+            input1 = result;
+            operator = value;
+            result = null;
+        } else {
+            operator = value;
+            input1 = Number(input1);
+            displayInput(input1);
+        }
     }
+    console.log(input1, operator);
 }
 
 // CALCULATION FUNCTIONS
@@ -144,8 +161,18 @@ const calcPercent = () => {
         displayInput(input1);
         return input1;
     }
+    if (result) {
+        result /= 100;
+        displayInput(result);
+        return result;
+    }
 };
 const changeSign = () => {
+    if (result) {
+        result *= -1;
+        displayInput(result);
+        return result;
+    }
     if (input2) {
         input2 *= -1;
         displayInput(input2);
@@ -157,7 +184,7 @@ const changeSign = () => {
             input2 = "-";
             displayInput(input2);
         } else if (input1 === "-") {
-            input1 = undefined;
+            input1 = null;
             displayInput("+");
             return input1;
         } else {
@@ -186,13 +213,17 @@ const addFloatingPoint = () => {
         displayInput(input1);
         isInput1Float = true;
     } else /* input1 is set */ {
-        if(operator) {
+        if (operator) {
             input2 = "0.";
             displayInput(input2);
             isInput2Float = true;
         } else {
             if (isInput1Float == false) {
-                input1 = input1.toString().concat(".");
+                if (input1 === "-") {
+                    input1 = "-0.";
+                } else {
+                    input1 = input1.concat(".");
+                }
                 displayInput(input1);
                 isInput1Float = true;
             } 
@@ -222,8 +253,7 @@ const calculate = () => {
         default:
             console.log('no operator selected');
     }
-    
-    input1 = result;
+
     reset();
 };
 
