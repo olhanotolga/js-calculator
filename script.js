@@ -6,14 +6,13 @@
 + disable inputs that start with multiple 0s
 + fix the issue with integers becoming floats with trailing 0s
 + fix floats becoming crazy: 2.0001 + 0.0003 = 2.0004000000000004
-- add the 'back to normal' button which reverts the division-by-zero animation
++ add the 'back to normal' button which reverts the division-by-zero animation
 + when "," is pressed after result is calculated, instead of concatenating consequent digits, input is reset <-- "," does not currently reset the result!
 */
 
 let input1 = null;
 let input2 = null;
 let result = null;
-
 let operator = null;
 
 // maybe worth creating isInput1Float and isInput2Float ?
@@ -22,7 +21,7 @@ let isInput2Float = false;
 
 const setInput = value => {
 
-    // if we have result, we do not concatenate new input values (input1 is reset)
+    // if we have result stored from the previous calculation, we should reset it back to null
     if (result !== null) {
         isInput1Float = false;
         displayInput(value);
@@ -37,11 +36,9 @@ const setInput = value => {
     } else {
         if(!operator) {
             input1 = input1.concat(value);
-            
             if (input1[0] === "0" && input1[1] !== ".") {
                 input1 = input1.substr(1);
             }
-            
             displayInput(input1);
             console.log(input1);
             
@@ -49,14 +46,12 @@ const setInput = value => {
             console.log(input1)
             if (!input2) {
                 displayInput(value);
-                // input2 = Number(value);
                 input2 = value;
             } else {
                 input2 = input2.concat(value);
                 if (input2[0] === "0" && input2[1] !== ".") {
                     input2 = input2.substr(1);
                 }
-                
                 displayInput(input2);
                 console.log(input2);
             }
@@ -108,21 +103,22 @@ const setOperator = value => {
 // CALCULATION FUNCTIONS
 
 const add = (a, b) => {
-    console.log(input1, typeof input1, input2, typeof input2);
-    
     result = Number((Number(a) + Number(b)).toFixed(10));
     return result;
 };
+
 const subtract = (a, b) => {
     result = Number((Number(a) - Number(b)).toFixed(10));
     return result;
 };
+
 const multiply = (a, b) => {
     result = Number((Number(a) * Number(b)).toFixed(10));    
     return result;
 };
+
 const divide = (a, b) => {
-    if (b === 0) {
+    if (b == 0) {
         dividedByZero();
         return document.querySelector('.display').innerHTML = "don't you ever divide by zero!";
     } else {
@@ -171,12 +167,11 @@ const changeSign = () => {
     }
     if (input1) {
         if(operator) {
-            // there is a problem with that: if I try to change the sign twice, it returns NaN (after multiplying the "-" string by -1)
             input2 = "-";
             displayInput(input2);
         } else if (input1 === "-") {
             input1 = null;
-            displayInput("+");
+            displayInput("0");
             return input1;
         } else {
             input1 *= -1;
@@ -185,7 +180,6 @@ const changeSign = () => {
         }
     }
     if (!input1) {
-        // there is a problem with that: if I try to change the sign twice, it returns NaN (after multiplying the "-" string by -1)
         input1 = "-";
         displayInput(input1);
     }
@@ -253,32 +247,31 @@ const calculate = () => {
     reset();
 };
 
-// animation upon division by zero
+// wreaks havoc upon division by zero
 const dividedByZero = () => {
-    // function call changes some styling:
+
+    // changes some styling:
     const bckground = document.querySelector("body");
     bckground.classList.add("brokenBckground");
     const display = document.querySelector(".display");
     display.classList.add("brokenDisplay");
 
-    // function moves each button by x value for left position and by y value for top position
-    const buttons = document.querySelectorAll("button");
+    const startAnewBtn = document.getElementById("startAnewBtn");
+    startAnewBtn.classList.add("emergeFreshStartBtn");
+
+    // function moves each button away from its start position
+    const buttons = document.querySelectorAll(".calcBtn");
 
     for (let button of buttons) {
-        // for each button, the styling is changed
         button.classList.add("brokenBtns");
         
-        // final x and y positions are set
         const randomMinusPlus50 = [Math.floor(Math.random() * 100 + 1), Math.floor(Math.random() * -100 - 1)];
         const finalPosX = randomMinusPlus50[Math.round(Math.random())];
         const finalPosY = randomMinusPlus50[Math.round(Math.random())];
 
-        // the initial x and y is 0
         let pos = 0;
 
-        // for each button, the movement from position 0 to position x and y is animated
         const animate = () => {
-            // ends animation once reached the final position
             if (Math.abs(pos) >= Math.abs(finalPosX) || Math.abs(pos) >= Math.abs(finalPosY)) {
                 clearInterval(animation);
             }
@@ -302,3 +295,27 @@ const dividedByZero = () => {
         const animation = setInterval(animate, 100);
     }
 };
+
+// undoes the animation mess:
+const freshStart = () => {
+    clearDisplay();
+    
+    const bckground = document.querySelector("body");
+    bckground.classList.remove("brokenBckground");
+    
+    const display = document.querySelector(".display");
+    display.classList.remove("brokenDisplay");
+    displayInput("*(^-^)*");
+
+    const startAnewBtn = document.getElementById("startAnewBtn");
+    startAnewBtn.classList.remove("emergeFreshStartBtn");
+
+    const buttons = document.querySelectorAll(".calcBtn");
+    const position = 0;
+    for (let button of buttons) {
+        // for each button, the styling is changed
+        button.classList.remove("brokenBtns");
+        button.style.left = position;
+        button.style.top = position;
+    }
+}

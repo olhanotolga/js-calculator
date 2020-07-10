@@ -49,6 +49,18 @@ button {
     background-color: #ffffff;
 }
 
+footer {
+    display: flex;
+    justify-content: center;
+    margin: 1.2em;
+}
+#startAnewBtn {
+    display: none;
+    background-color: white;
+    border: 2px solid #001010;
+    text-transform: uppercase;
+    padding: .3em .5em;
+}
 
 /* functional classes */
 .brokenDisplay {
@@ -62,6 +74,10 @@ button {
 }
 .brokenBtns {
     background-color: #ffd700;
+}
+#startAnewBtn.emergeFreshStartBtn {
+    display: block;
+    z-index: 3;
 }
 
 @media screen and (min-width: 1000px) {
