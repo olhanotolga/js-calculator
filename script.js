@@ -4,7 +4,8 @@
 + allow inputs that start with -0.
 + disable inputs that start with 0 and are not floats
 + disable inputs that start with multiple 0s
-- fix the issue with integers becoming floats with trailing 0s
++ fix the issue with integers becoming floats with trailing 0s
++ fix floats becoming crazy: 2.0001 + 0.0003 = 2.0004000000000004
 - add the 'back to normal' button which reverts the division-by-zero animation
 + when "," is pressed after result is calculated, instead of concatenating consequent digits, input is reset <-- "," does not currently reset the result!
 */
@@ -23,6 +24,7 @@ const setInput = value => {
 
     // if we have result, we do not concatenate new input values (input1 is reset)
     if (result !== null) {
+        isInput1Float = false;
         displayInput(value);
         result = null;
         return input1 = value;
@@ -72,7 +74,7 @@ const clearDisplay = () => {
     reset();
     result = null;
     isInput1Float = false;
-    document.querySelector('.display').innerHTML = 0;
+    displayInput(0);
 }
 
 // reset the values of inputs and operator
@@ -107,42 +109,24 @@ const setOperator = value => {
 
 const add = (a, b) => {
     console.log(input1, typeof input1, input2, typeof input2);
-    if (isInput1Float == true || isInput2Float == true) {
-        result = (Number(a) + Number(b)).toFixed(5);
-        return result;
-    } else {
-        result = Number(a) + Number(b);
-        return result;
-    }
+    
+    result = Number((Number(a) + Number(b)).toFixed(10));
+    return result;
 };
 const subtract = (a, b) => {
-    if (isInput1Float == true || isInput2Float == true) {
-        result = (Number(a) - Number(b)).toFixed(5);
-        return result;
-    } else {
-        result = Number(a) - Number(b);
-        return result;
-    }
+    result = Number((Number(a) - Number(b)).toFixed(10));
+    return result;
 };
 const multiply = (a, b) => {
-    if (isInput1Float == true || isInput2Float == true) {
-        result = (Number(a) * Number(b)).toFixed(5);
-        return result;
-    } else {
-        result = Number(a) * Number(b);
-        return result;
-    }
+    result = Number((Number(a) * Number(b)).toFixed(10));    
+    return result;
 };
 const divide = (a, b) => {
-    if (b == 0) {
+    if (b === 0) {
         dividedByZero();
         return document.querySelector('.display').innerHTML = "don't you ever divide by zero!";
-    }
-    if (isInput1Float == true || isInput2Float == true) {
-        result = (Number(a) / Number(b)).toFixed(5);
-        return result;
     } else {
-        result = Number(a) / Number(b);
+        result = Number((Number(a) / Number(b)).toFixed(10));
         return result;
     }
 };
@@ -214,7 +198,7 @@ const addFloatingPoint = () => {
     }
     console.log(`input1: ${input1}, input2: ${input2}, result: ${result}`);
     if (input2) {
-        if (isInput2Float == false) {
+        if (isInput2Float === false) {
             input2 = input2.toString().concat(".");
             displayInput(input2);
             isInput2Float = true;
@@ -230,7 +214,7 @@ const addFloatingPoint = () => {
             displayInput(input2);
             isInput2Float = true;
         } else {
-            if (isInput1Float == false) {
+            if (isInput1Float === false) {
                 if (input1 === "-") {
                     input1 = "-0.";
                 } else {
