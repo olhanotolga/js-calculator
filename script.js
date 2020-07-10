@@ -255,9 +255,8 @@ const dividedByZero = () => {
     for (let button of buttons) {
         button.classList.add("brokenBtns");
         
-        const randomMinusPlus50 = [Math.floor(Math.random() * 100 + 1), Math.floor(Math.random() * -100 - 1)];
-        const finalPosX = randomMinusPlus50[Math.round(Math.random())];
-        const finalPosY = randomMinusPlus50[Math.round(Math.random())];
+        const finalPosX = Math.round((Math.random() - 0.5) * 200);
+        const finalPosY = Math.round((Math.random() - 0.5) * 200);
 
         let pos = 0;
 
@@ -282,6 +281,7 @@ const dividedByZero = () => {
                 button.style.top = pos + "px";
             }
         }
+        
         const animation = setInterval(animate, 100);
     }
 };
