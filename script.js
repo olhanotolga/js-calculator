@@ -256,8 +256,11 @@ const dividedByZero = () => {
     const display = document.querySelector(".display");
     display.classList.add("brokenDisplay");
 
-    const startAnewBtn = document.getElementById("startAnewBtn");
-    startAnewBtn.classList.add("emergeFreshStartBtn");
+    setTimeout(() => {
+        const startAnewBtn = document.getElementById("startAnewBtn");
+        startAnewBtn.classList.add("emergeFreshStartBtn");
+    }, 4000)
+    
 
     // function moves each button away from its start position
     const buttons = document.querySelectorAll(".calcBtn");
@@ -307,9 +310,6 @@ const freshStart = () => {
     display.classList.remove("brokenDisplay");
     displayInput("*(^-^)*");
 
-    const startAnewBtn = document.getElementById("startAnewBtn");
-    startAnewBtn.classList.remove("emergeFreshStartBtn");
-
     const buttons = document.querySelectorAll(".calcBtn");
     const position = 0;
     for (let button of buttons) {
@@ -318,4 +318,8 @@ const freshStart = () => {
         button.style.left = position;
         button.style.top = position;
     }
+
+    const startAnewBtn = document.getElementById("startAnewBtn");
+    startAnewBtn.classList.remove("emergeFreshStartBtn");
+    
 }
