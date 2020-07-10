@@ -1,21 +1,8 @@
-/*
-+ if calculation is followed by input (not operator), reassign input1 as value
-+ if calculation is followed by operator, reassign input1 as result
-+ allow inputs that start with -0.
-+ disable inputs that start with 0 and are not floats
-+ disable inputs that start with multiple 0s
-+ fix the issue with integers becoming floats with trailing 0s
-+ fix floats becoming crazy: 2.0001 + 0.0003 = 2.0004000000000004
-+ add the 'back to normal' button which reverts the division-by-zero animation
-+ when "," is pressed after result is calculated, instead of concatenating consequent digits, input is reset <-- "," does not currently reset the result!
-*/
-
 let input1 = null;
 let input2 = null;
 let result = null;
 let operator = null;
 
-// maybe worth creating isInput1Float and isInput2Float ?
 let isInput1Float = false;
 let isInput2Float = false;
 
