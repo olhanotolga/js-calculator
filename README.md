@@ -6,7 +6,7 @@ This is a simple calculator app created with HTML, CSS, and vanilla JS as a Frau
 
 [JS Calculator](https://olhanotolga.github.io/js-calculator/)
 
-In progress...
+![JavaScript calculator: screenshot](screenshot.png)
 
 ## Features
 
@@ -20,4 +20,10 @@ In progress...
 
 * [x] Support of chained calculations (no need to press/click/tap ``` = ``` every time)
 * [x] Automatic reset when starting a new calculation (no need to press/click/tap ``` AC ``` each time)
-* [x] Breaks down *__spectacularly__* upon dividing by zero
+* [x] More or less well-behaving floats
+* [x] Breaks down *__spectacularly__* upon dividing by zero 💥:bomb:💥
+* [x] Responsive layout
+
+## Code
+
+HTML, CSS (with Flexbox, Grid, and media queries), JavaScript (ES6)
