@@ -2,8 +2,10 @@
 + if calculation is followed by input (not operator), reassign input1 as value
 + if calculation is followed by operator, reassign input1 as result
 + allow inputs that start with -0.
-- forbid inputs that start with multiple 0s
+- disable inputs that start with multiple 0s
 - fix the issue with integers becoming floats with trailing 0s
+- add the 'back to normal' button which reverts the division-by-zero animation
++ when "," is pressed after result is calculated, instead of concatenating consequent digits, input is reset <-- "," does not currently reset the result!
 */
 
 let input1 = null;
@@ -18,13 +20,12 @@ let isInput2Float = false;
 
 const setInput = value => {
 
-    // if we have result that was set to input1, we do not concatenate new input values (input1 is reset)
+    // if we have result, we do not concatenate new input values (input1 is reset)
     if (result !== null) {
         displayInput(value);
         result = null;
         return input1 = value;
     }
-    
 
     if (input1 === null) {
         displayInput(value);
@@ -32,9 +33,13 @@ const setInput = value => {
         console.log(input1, typeof input1);
     } else {
         if(!operator) {
-            let twoDigitInput1 = input1.toString().concat(value);
-            // input1 = Number(twoDigitInput1);
-            input1 = twoDigitInput1;
+            input1 = input1.concat(value);
+            if (input1 === "00") {
+                input1 = "0";
+            }
+            // let twoDigitInput1 = input1.toString().concat(value);
+            // input1 = twoDigitInput1;
+            
             displayInput(input1);
             console.log(input1);
             
@@ -45,9 +50,12 @@ const setInput = value => {
                 // input2 = Number(value);
                 input2 = value;
             } else {
-                let twoDigitInput2 = input2.toString().concat(value);
-                // input2 = Number(twoDigitInput2);
-                input2 = twoDigitInput2;
+                input2 = input2.concat(value);
+                if (input2 === "00") {
+                    input2 = "0";
+                }
+                // let twoDigitInput2 = input2.toString().concat(value);
+                // input2 = twoDigitInput2;
                 displayInput(input2);
                 console.log(input2);
             }
@@ -202,6 +210,10 @@ const changeSign = () => {
 
 // maybe replace the check with native Number.isInteger(num) method?
 const addFloatingPoint = () => {
+    if (result) {
+        result = null;
+    }
+    console.log(`input1: ${input1}, input2: ${input2}, result: ${result}`);
     if (input2) {
         if (isInput2Float == false) {
             input2 = input2.toString().concat(".");
@@ -213,6 +225,7 @@ const addFloatingPoint = () => {
         displayInput(input1);
         isInput1Float = true;
     } else /* input1 is set */ {
+
         if (operator) {
             input2 = "0.";
             displayInput(input2);
